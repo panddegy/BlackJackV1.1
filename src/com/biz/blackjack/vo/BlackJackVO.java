@@ -7,6 +7,16 @@ public class BlackJackVO {
 	private String cardNum;		// 숫자 (A~K)
 	private int cardVal;		// 값 (1~10)
 	
+	// VO에 값을 저장하기 편리하게 하기 위한 생성자 생성	
+	public BlackJackVO() {
+		super();
+	}
+	public BlackJackVO(String cardShape, String cardNum, int cardVal) {
+		super();
+		this.cardShape = cardShape;
+		this.cardNum = cardNum;
+		this.cardVal = cardVal;
+	}
 	//외부에서 접글할 getter와 setter 생성
 	public String getCardShape() {
 		return cardShape;

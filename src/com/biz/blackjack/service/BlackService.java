@@ -50,11 +50,8 @@ public class BlackService {
 		int cardVal=1;
 		// for를 사용하여 BlackJackVO를 선언하고 vo에 값을 저장
 		for(String s:num) {
-			BlackJackVO vo=new BlackJackVO();
-			vo.setCardShape(shape);
-			vo.setCardNum(s);
+			BlackJackVO vo=new BlackJackVO(shape, s, cardVal++);
 			// Value에 저장할 값은 ++를 이용하여 저장후 1씩 증가
-			vo.setCardVal(cardVal++);
 			// Value에 저장될 값이 10을 초과하면 10으로 저장
 			if(cardVal>10) cardVal=10;
 			// deck 리스트에 vo를 추가
@@ -73,24 +70,19 @@ public class BlackService {
 			buffer=new BufferedReader(fr);
 			String reader=buffer.readLine();
 			String[] readArr=reader.split(":");
-			UserVO vo=new UserVO();
-			vo.setStrDate(readArr[0]);
-			vo.setFloatWin(Float.valueOf(readArr[1]));
-			vo.setFloatLose(Float.valueOf(readArr[2]));
-			vo.setFloatTotal(Float.valueOf(readArr[3]));
+			UserVO vo=new UserVO(readArr[0],
+				Float.valueOf(readArr[1]),
+				Float.valueOf(readArr[2]),
+				Float.valueOf(readArr[3]));
 			buffer.close();
 			fr.close();
 			return vo;
 		} catch (FileNotFoundException e) {
 			// 파일경로를 못찾을 경우(신규 사용자의 경우)
 			// VO를 생성하고 0을 저장하고 write()에 전달하여 파일 생성
-			UserVO vo=new UserVO();
 			LocalDate ld=LocalDate.now();
 			String strDate=ld.toString();
-			vo.setStrDate(strDate);
-			vo.setFloatWin(0f);
-			vo.setFloatLose(0f);
-			vo.setFloatTotal(0f);
+			UserVO vo=new UserVO(strDate, 0f, 0f, 0f);
 			this.writeFile(vo);
 			return vo;
 		} catch (IOException e) {
@@ -107,7 +99,8 @@ public class BlackService {
 		
 		try {
 			pw=new PrintWriter(filePath);
-			String writer=vo.getStrDate()+":"+vo.getFloatWin()+":"+vo.getFloatLose()+":"+vo.getFloatTotal();
+			String writer=vo.getStrDate()+":"+vo.getFloatWin()+":"+
+					vo.getFloatLose()+":"+vo.getFloatTotal();
 			pw.println(writer);
 			pw.close();
 		} catch (FileNotFoundException e) {

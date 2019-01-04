@@ -8,6 +8,19 @@ public class UserVO {
 	private float floatWin;		// 승리한 게임 수
 	private float floatLose;	// 패배한 게임 수
 	
+	// VO에 값을 저장하기 편리하게 하기 위한 생성자 생성
+	public UserVO() {
+		super();
+	}
+
+	public UserVO(String strDate, float floatTotal, float floatWin, float floatLose) {
+		super();
+		this.strDate = strDate;
+		this.floatTotal = floatTotal;
+		this.floatWin = floatWin;
+		this.floatLose = floatLose;
+	}
+
 	//외부에서 접근할 getter와 setter 생성
 	public String getStrDate() {
 		return strDate;

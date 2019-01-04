@@ -195,6 +195,7 @@ public class JackService {
 		// user가 카드 A를 가지고 있으면 1 or 11로 사용할지 결정
 		for(BlackJackVO vo:user) {
 			if(vo.getCardVal()==1) {
+				System.out.println(">> ");
 				System.out.println(">> A를 1(1)번 or 2(11)로 쓰시겠습니까?");
 				System.out.print(">> ");
 				String strOR=sc.nextLine();
@@ -208,25 +209,34 @@ public class JackService {
 		// 그 결과를 UserVO에 저장
 		if(intUserSum>21) {
 			System.out.println(">> "+strID+"이(가) 21을 초과하여 게임에서 패배하였습니다.");
+			System.out.println(">> ");
 			uvo.setFloatLose(uvo.getFloatLose()+1f);
 			uvo.setFloatTotal(uvo.getFloatTotal()+1f);
 			return;
 		}
 		if(intDealerSum>21) {
 			System.out.println(">> 딜러가 21을 초과하여 게임에서 승리하였습니다.");
+			System.out.println(">> ");
 			uvo.setFloatWin(uvo.getFloatWin()+1f);
 			uvo.setFloatTotal(uvo.getFloatTotal()+1f);
 			return;
 		}
 		if(intUserSum>intDealerSum) {
 			System.out.println(">> 게임에서 승리하였습니다.");
+			System.out.println(">> ");
 			uvo.setFloatWin(uvo.getFloatWin()+1f);
 			uvo.setFloatTotal(uvo.getFloatTotal()+1f);
+			return;
+		}
+		if(intUserSum==intDealerSum) {
+			System.out.println(">> 게임에서 비기셨습니다.");
+			System.out.println(">> ");
 			return;
 		}
 		uvo.setFloatLose(uvo.getFloatLose()+1f);
 		uvo.setFloatTotal(uvo.getFloatTotal()+1f);
 		System.out.println(">> 게임에서 패배하였습니다.");
+		System.out.println(">> ");
 	}
 	
 	public void record(UserVO vo) {
